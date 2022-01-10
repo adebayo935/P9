@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="fr">
+	<head>
+		<meta charset="utf-8"/>
+		<title>LITReview</title>
+		<link rel="stylesheet" href="{% static 'listings/styles.css' %}" />
+		<style>
+		{% block style %}{% endblock %}
+		</style>
+	</head>
+	<body style="background-color:grey">
+		<section>
+			<div class="section">
+				<h1 class="title">LITReview</h1>
+				<hr>
+
+					{% block content %}{% endblock %}
+
+			
+			</div>
+		</section>
+	</body>
+</html>

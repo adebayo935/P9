@@ -1,0 +1,97 @@
+{% extends 'listings/base_flux.html' %}
+
+
+	{% block style %}
+		.section {font-size:medium;height:2100px;width:1260px;border-style:solid;position:relative;left:400px;}
+		.title {text-align:center;}
+		.buttons {position:absolute;top:105px;left:425px;width:400px;}
+		.menu {font-size:20px;text-align:right;right:10px;position:absolute;}
+		.flux {border-style:solid;height:1900px;width:1000px;position:relative;left:120px;top:45px;}
+		.entry {border-style:solid;border-color:yellow;position:relative;margin:10px;}
+		.title_entry {font-size:45px;}
+		.date_entry {top:5px;right:1px;position:absolute;}
+		.ticket {background-color:purple}
+		.review {background-color:pink}
+	{% endblock %}
+
+	{% block content %}
+		<div class="buttons">
+			<a href="http://127.0.0.1:8000/accounts/login/flux/ask-rev/"><input type="button" id="ask_rev" style="height:35px;left:1px;position:absolute" value="Demander une critique"></a>
+			<a href="http://127.0.0.1:8000/accounts/login/flux/make-rev/"><input type="button" id="make_rev" style="height:35px;right:1px;position:absolute" value="Publier une critique"></a>
+		</div>
+		<div class="flux">
+						    {% for entry in total %}
+								{% if entry.headline is not None %}
+								
+									<div class="entry review">
+									{% if entry.user == user %}
+									<span class="title_entry ">Vous avez publié une critique</span>
+									{% else %}
+									<span class="title_entry ">{{ entry.user }} a publié une critique</span>
+									{% endif %}
+									{% if entry.rating == 1 %}
+									<h2 style="font-size:40px;">{{ entry.headline }} - <img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/></h2>  <span class="date_entry">{{ entry.time_created }}</span>
+									{% elif entry.rating == 2 %}
+									<h2 style="font-size:40px;">{{ entry.headline }} - <img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/></h2>  <span class="date_entry">{{ entry.time_created }}</span>
+									{% elif entry.rating == 3 %}
+									<h2 style="font-size:40px;">{{ entry.headline }} - <img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/></h2>  <span class="date_entry">{{ entry.time_created }}</span>
+									{% elif entry.rating == 4 %}
+									<h2 style="font-size:40px;">{{ entry.headline }} - <img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/></h2>  <span class="date_entry">{{ entry.time_created }}</span>
+									{% else %}
+									<h2 style="font-size:40px;">{{ entry.headline }} - <img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/><img style="width:20px;height:20px;" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.iconfinder.com%2Fdata%2Ficons%2Finverticons-fill-vol-3%2F32%2Frating_star_favorite-512.png&f=1&nofb=1"/></h2>  <span class="date_entry">{{ entry.time_created }}</span>							
+									{% endif %}
+									<span style="font-size:25px;">{{ entry.body }}</span><br><br><hr><br>
+									
+									<span style="font-size:22px;">Ticket - {{ entry.ticket.user }}</span><br><br>
+									
+									<h3 style="margin-left:5px;font-style:italic;font-size:30px;">{{ entry.ticket.title }}</h3><br>
+									
+									{% load static %}
+									<img style="width:200px;height:250px;" src="{{ entry.ticket.image.url }}"/>
+									
+									<span style="margin-left:10px;font-size:20px;vertical-align:top;">{{ entry.ticket.description }}</span>
+									
+									</div>
+									<br>
+									
+								{% else %}
+									
+									<div class="entry ticket">
+									
+									{% if entry.user == user %}
+									<span class="title_entry ">Vous avez demandé une critique</span>
+									{% else %}
+									<span class="title_entry ">{{ entry.user }} a demandé une critique</span>{% endif %}   <span class="date_entry">{{ entry.time_created }}</span><br>
+										<h2 style="margin-left:5px;font-style:italic;font-size:30px;">{{ entry.title }}</h2><br>
+										
+										<img style="width:200px;height:250px;" src="{{ entry.image.url }}"/>
+										
+										<span style="margin-left:10px;font-size:20px;vertical-align:top;">{{ entry.description }}</span>
+										
+										{% if  entry.review_set.count == 0 %}
+										
+										<button style="position:absolute;bottom:10px;right:10px;"><a href="http://127.0.0.1:8000/accounts/login/flux/{{ entry.id }}/answer-rev/">Répondre<a/></button>
+										
+										{% endif %}
+										
+									</div>
+								{% endif %}
+							{% endfor %}
+	<span>
+        {% if total.has_previous %}
+            <a href="?page=1">« première</a>
+            <a href="?page={{ total.previous_page_number }}">précédente</a>
+        {% endif %}
+    
+        <span>
+            Page {{ total.number }} sur {{ total.paginator.num_pages }}.
+
+        </span>
+        {% if total.has_next %}
+            <a href="?page={{ total.next_page_number }}">suivante</a>
+            
+            <a href="?page={{ total.paginator.num_pages }}">dernière »</a>
+        {% endif %}
+    </span>
+		</div>
+	{% endblock %}

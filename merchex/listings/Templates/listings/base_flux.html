@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="P-9\styles.css"/>
+		<title>LITReview</title>
+		<style>
+		{% block style %}{% endblock %}
+		</style>
+	</head>
+	<body style="background-color:grey">
+		<section>
+			<div class="section">
+				<h1 class="title">LITReview</h1>
+				<div>
+				{% if user.is_authenticated %}<span style="font-size:20px" class="login">  Welcome, {{ user.login }} !    <a href="http://127.0.0.1:8000/home">Se deconnecter </a></span>{% endif %}<span class="menu"><a href="http://127.0.0.1:8000/accounts/login/flux">Flux </a><a href="http://127.0.0.1:8000/accounts/login/posts">|   Posts </a><a href="http://127.0.0.1:8000/accounts/login/subs">|   Abonnements </a></span>
+				</div>
+				<hr>
+					{% block content %}{% endblock %}
+			</div>
+		</section>
+	</body>
+</html>

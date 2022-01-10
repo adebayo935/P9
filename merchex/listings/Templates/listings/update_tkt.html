@@ -1,0 +1,22 @@
+{% extends 'listings/base_flux.html' %}
+
+
+	{% block style %}
+			.section {font-size:medium;height:1040px;width:1260px;border-style:solid;position:relative;left:400px;}
+			.title {text-align:center; position:relative;}
+			.section_title {top:7px;}
+			.menu {text-align:right;right:10px;position:absolute;}
+			.base {height:1100px;width:1000px;position:relative;left:120px;top:5px;text-align:left;}
+			form {position:relative;top:10px}
+	{% endblock %}
+
+	{% block content %}
+		<h2 class="title">Modifier un ticket</h2>
+		<div class="base">
+			<form action="" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form_tkt.as_p }}
+				<input style="height:70px;width:170px;position:absolute;right:50px;" type="submit" value="Envoyer">
+			</form>
+		</div>
+	{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'listings/base_flux.html' %}
+
+
+	{% block style %}
+			.section {font-size:medium;height:1540px;width:1260px;border-style:solid;position:relative;left:400px;}
+			.title {text-align:center; position:relative;}
+			.section_title {top:7px;}
+			.menu {text-align:right;right:10px;position:absolute;}
+			.follow {height:110px;width:1000px;border-style:solid;position:relative;left:120px;top:5px;text-align:center;}
+			.search-bar {position:relative;top:10px;}
+			.followers {height:400px;width:1000px;border-style:solid;position:relative;left:120px;top:5px;}
+			.following {height:400px;width:1000px;border-style:solid;position:relative;left:120px;top:5px;}
+			.button {position:absolute;right:115px;top:1px;}
+	{% endblock %}
+
+	{% block content %}
+	<h2 class="title">Suivre un utilisateur</h2>
+					<div class="follow">
+						<form class="search-bar" action="" method="post">
+							{% csrf_token %}
+							{{ form }}
+							<input class="button" style="height:65px;width:140px;" type="submit" value="Suivre"/>
+						</form>
+					</div>
+					<h2 class="title section_title">Abonnements</h2>
+					<div class="followers">
+						    {% for entry in users %}
+								{% if entry.user == user %}
+									<p style="font-size:25px;text-align:center">{{ entry.followed_user }} <button style="position:absolute;right:75px;"><a href="http://127.0.0.1:8000/accounts/login/subs/{{ entry.followed_user.id }}/delete-follow/">Supprimer<a/></button></p>
+									<hr>
+								{% endif %}
+							{% empty %}
+								Aucun abonnement
+							{% endfor %}
+					</div>
+					<h2 class="title section_title">Abonnés</h2>
+					<div class="following">
+						    {% for entry in users %}
+								{% if entry.followed_user == user %}
+									<p style="font-size:25px;text-align:center">{{ entry.user }}</p>
+									<hr>
+								{% endif %}
+							{% empty %}
+								Aucun abonné
+							{% endfor %}
+					</div>
+	{% endblock %}
