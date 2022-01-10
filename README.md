@@ -1,6 +1,6 @@
 # P9
 
-## Initialisation
+## Initialisation et Infos
 
 Pour pouvoir utiliser le projet, il vous faudra au préalable récupérer l'intégralité du dossier merchex.
 
