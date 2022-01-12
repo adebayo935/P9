@@ -47,7 +47,7 @@
 									<h3 style="margin-left:5px;font-style:italic;font-size:30px;">{{ entry.ticket.title }}</h3><br>
 									
 									{% load static %}
-									<img style="width:200px;height:250px;" src="{{ entry.ticket.image.url }}"/>
+									{% if entry.ticket.image %}<img style="width:200px;height:250px;" src="{{ entry.ticket.image.url }}"/>{% endif %}
 									
 									<span style="margin-left:10px;font-size:20px;vertical-align:top;">{{ entry.ticket.description }}</span>
 									
@@ -64,7 +64,7 @@
 									<span class="title_entry ">{{ entry.user }} a demandé une critique</span>{% endif %}   <span class="date_entry">{{ entry.time_created }}</span><br>
 										<h2 style="margin-left:5px;font-style:italic;font-size:30px;">{{ entry.title }}</h2><br>
 										
-										<img style="width:200px;height:250px;" src="{{ entry.image.url }}"/>
+										{% if entry.image %}<img style="width:200px;height:250px;" src="{{ entry.image.url }}"/>{% endif %}
 										
 										<span style="margin-left:10px;font-size:20px;vertical-align:top;">{{ entry.description }}</span>
 										

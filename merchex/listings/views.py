@@ -37,19 +37,14 @@ def register(request):
     else:
         form = CustomUserCreationForm()
 
-    print("Request method : ", request.method)
-    print("Données formulaire : ", request.POST)
     return render(request, 'listings/register.html', {'form':form})
 
 
 def posts(request):
     reviews = list(Review.objects.filter(user=request.user))
     tickets = list(Ticket.objects.filter(user=request.user))
-    reviews.sort()
-    tickets.sort()
     total = reviews+tickets
     total.sort()
-    print(total)
 
     paginator = Paginator(total,3)
     page_number =request.GET.get('page')
@@ -59,23 +54,22 @@ def posts(request):
 
 
 def flux(request):
+
+    following = list(UserFollows.objects.filter(user=request.user))
     reviews = list(Review.objects.all())
     tickets = list(Ticket.objects.all())
-    reviews.sort()
-    tickets.sort()
     total = reviews+tickets
     total.sort()
-    which = []
-    for entry in total :
-        if isinstance(entry,Review) is True:
-            which.append("Review")
-        else :
-            which.append("Ticket")
-    print(which)
-    print(total)
-    print(isinstance(total[0],Review))
+    total_user = user_tkt + user_rev
+    total_user.sort()
+    flux = []
+    if following :
+        for entry in total:
+            for line in following :
+                if entry.user == line.followed_user:
+                    flux.append(entry)
 
-    paginator = Paginator(total,3)
+    paginator = Paginator(flux,3)
     page_number =request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -91,8 +85,6 @@ def subs(request):
             followed_user = User.objects.get(id=request.POST['Selection']),
             )
         follows.save()
-        print("Request method : ", request.method)
-        print("Données formulaire : ", request.POST)
         return render(request, 'listings/subs.html',{'form': form, 'users': users})
     else:
         form = UsersForm()
@@ -104,7 +96,6 @@ def make_rev(request):
         form_ticket = AskRevForm(request.POST, request.FILES)
         form_rev = MakeRevForm(request.POST, instance=Ticket())
         if form_ticket.is_valid() and form_rev.is_valid():
-            print(request.user)
             ticket = Ticket(
                 title=request.POST.get('Titre'),
                 description=request.POST.get('Description'),
@@ -134,10 +125,6 @@ def ask_rev(request):
         titre = request.POST.get('Titre')
         description = request.POST.get('Description')
         image = request.FILES.get('image')
-        print(titre)
-        print(description)
-        print(request.user)
-        print(image)
         ticket = Ticket(
             title = titre,
             description = description,
@@ -157,7 +144,6 @@ def answer_rev(request, id):
         ticket = Ticket.objects.get(id=id)
         form_rev = MakeRevForm(request.POST, instance=Ticket())
         if form_rev.is_valid():
-            print(request.user)
             review = Review(
                 ticket = ticket,
                 headline = request.POST.get('Sujet'),

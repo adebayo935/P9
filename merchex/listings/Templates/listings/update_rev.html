@@ -29,7 +29,7 @@
 									<span class="title_entry ">{{ ticket.user }} a demandé une critique</span>{% endif %}   <span class="date_entry">{{ ticket.time_created }}</span><br>
 										<h2>{{ ticket.title }}</h2><br>
 										
-										<img style="width:200px;height:300px;" src="{{ ticket.image.url }}"/>
+										{% if ticket.image %}<img style="width:200px;height:300px;" src="{{ ticket.image.url }}"/>{% endif %}
 										
 										<span style="margin-left:10px;font-size:20px;vertical-align:top;">{{ ticket.description }}</span>
 										
